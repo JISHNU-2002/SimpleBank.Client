@@ -1,0 +1,61 @@
+﻿@model ApplicationFormDto
+
+@{
+    Layout = "_HomeLayout";
+    ViewData["Title"] = "Application Form Details";
+}
+
+<div class="d-flex">
+    @await Html.PartialAsync("_SidebarPartial")
+    <div class="flex-grow-1 p-4 bg-light">
+        <div class="container">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Application Form Details</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">Form Id</dt>
+                        <dd class="col-sm-8">@Model.FormId</dd>
+
+                        <dt class="col-sm-4">Full Name</dt>
+                        <dd class="col-sm-8">@Model.FullName</dd>
+
+                        <dt class="col-sm-4">Email</dt>
+                        <dd class="col-sm-8">@Model.Email</dd>
+
+                        <dt class="col-sm-4">Phone</dt>
+                        <dd class="col-sm-8">@Model.PhoneNumber</dd>
+
+                        <dt class="col-sm-4">Aadhar</dt>
+                        <dd class="col-sm-8">@Model.AadharNumber</dd>
+
+                        <dt class="col-sm-4">PAN</dt>
+                        <dd class="col-sm-8">@Model.PAN</dd>
+
+                        <dt class="col-sm-4">Address</dt>
+                        <dd class="col-sm-8">@Model.Address</dd>
+
+                        <dt class="col-sm-4">Date of Birth</dt>
+                        <dd class="col-sm-8">@Model.DOB.ToShortDateString()</dd>
+
+                        <dt class="col-sm-4">Account Type ID</dt>
+                        <dd class="col-sm-8">@Model.AccountTypeId</dd>
+
+                        <dt class="col-sm-4">Account Type</dt>
+                        <dd class="col-sm-8">@Model.AccountTypeName</dd>
+
+                        <dt class="col-sm-4">IFSC</dt>
+                        <dd class="col-sm-8">@Model.IFSC</dd>
+
+                        <dt class="col-sm-4">Branch</dt>
+                        <dd class="col-sm-8">@Model.BranchName</dd>
+
+                        <dt class="col-sm-4">Registration Date</dt>
+                        <dd class="col-sm-8">@Model.DateOfRegistration.ToShortDateString()</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

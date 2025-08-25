@@ -1,0 +1,126 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet" />
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden; /* Prevent scrolling */
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #004bff 0%, #0052cc 50%, #0069ff 100%);
+            height: 100vh;
+            color: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .content-wrapper {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .privacy-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+        }
+
+            .privacy-card h1 {
+                font-weight: bold;
+                color: white;
+            }
+
+            .privacy-card p {
+                font-size: 1.1rem;
+                line-height: 1.6;
+                color: #e0e0e0;
+            }
+
+        .banking-image {
+            border-radius: 20px;
+            max-height: 350px;
+            object-fit: contain;
+            width: 100%;
+            filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.3));
+        }
+
+        .nav-link {
+            color: white !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-section">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <i class="bi bi-bank me-2"></i>Simple Bank
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                    </ul>
+                    <a class="btn btn-warning fw-bold px-4" asp-controller="Authorize" asp-action="Login">Login</a>
+                </div>
+            </div>
+        </nav>
+        <hr />
+
+        <!-- Content Section (fills remaining space) -->
+        <div class="container content-wrapper">
+            <div class="row w-100 align-items-center">
+                <!-- Left: Privacy Content -->
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="privacy-card">
+                        <h1>@ViewData["Title"]</h1>
+                        <p>Use this page to detail your site's privacy policy.</p>
+                    </div>
+                </div>
+
+                <!-- Right: Image -->
+                <div class="col-lg-6 text-center">
+                    <img src="https://protium.co.in/wp-content/uploads/2022/12/Banking-as-a-service-BaaS-700x682.png"
+                         alt="Digital Banking Illustration"
+                         class="banking-image"
+                         loading="lazy" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

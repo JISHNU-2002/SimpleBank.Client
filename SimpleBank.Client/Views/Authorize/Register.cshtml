@@ -1,0 +1,108 @@
+﻿@using SimpleBankClient.Entity.Dto
+@model RegisterRequestDto
+
+@{
+    ViewData["Title"] = "Register User";
+    Layout = "_HomeLayout"; 
+}
+
+<div class="d-flex">
+    @await Html.PartialAsync("_SidebarPartial") 
+
+    <!-- Main Content -->
+    <div class="flex-grow-1 p-4 bg-light">
+        <div class="card shadow border-0 rounded-4">
+            <div class="card-header bg-primary text-white rounded-top-4">
+                <h4 class="mb-0">Register New User</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="Register">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <!-- Login Credentials -->
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label asp-for="UserName" class="form-label"></label>
+                            <input asp-for="UserName" class="form-control" />
+                            <span asp-validation-for="UserName" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="Password" class="form-label"></label>
+                            <input asp-for="Password" class="form-control" type="password" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <!-- Application Form Fields -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label asp-for="FullName" class="form-label"></label>
+                            <input asp-for="FullName" class="form-control" />
+                            <span asp-validation-for="FullName" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Email" class="form-label"></label>
+                            <input asp-for="Email" class="form-control" type="email" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label asp-for="PhoneNumber" class="form-label"></label>
+                            <input asp-for="PhoneNumber" class="form-control" />
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="AadharNumber" class="form-label"></label>
+                            <input asp-for="AadharNumber" class="form-control" />
+                            <span asp-validation-for="AadharNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label asp-for="PAN" class="form-label"></label>
+                            <input asp-for="PAN" class="form-control" />
+                            <span asp-validation-for="PAN" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Address" class="form-label"></label>
+                            <input asp-for="Address" class="form-control" />
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label asp-for="DOB" class="form-label"></label>
+                            <input asp-for="DOB" class="form-control" type="date" />
+                            <span asp-validation-for="DOB" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="AccountTypeId" class="form-label"></label>
+                            <input asp-for="AccountTypeId" class="form-control" />
+                            <span asp-validation-for="AccountTypeId" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="IFSC" class="form-label"></label>
+                            <input asp-for="IFSC" class="form-control" />
+                            <span asp-validation-for="IFSC" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <!-- Submit -->
+                    <div class="mt-4">
+                        <input type="submit" value="Register User" class="btn btn-success px-4" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

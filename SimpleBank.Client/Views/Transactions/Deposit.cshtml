@@ -1,0 +1,59 @@
+﻿@model SimpleBankClient.Entity.Dto.MoneyTransferDto
+
+@{
+    ViewData["Title"] = "Deposit Money";
+    Layout = "_HomeLayout";
+}
+
+<div class="d-flex">
+    <!-- Sidebar -->
+    @await Html.PartialAsync("_SidebarPartial")
+
+    <!-- Main Content -->
+    <div class="flex-grow-1 p-4 bg-light d-flex justify-content-center align-items-center">
+        <div class="col-md-6">
+            <div class="card shadow rounded-4">
+                <div class="card-header bg-primary text-white text-center rounded-top-4">
+                    <h5 class="mb-0">Initiate Transaction</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Deposit" method="post" novalidate>
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                        <div class="row g-3">
+                            <input type="hidden" asp-for="TransactionType" />
+                            <input type="hidden" asp-for="FromAccountNumber" />
+
+                            <div class="col-md-12" id="fromAccountGroup">
+                                <label asp-for="ToAccountNumber" class="form-label">To Account</label>
+                                <input asp-for="ToAccountNumber" class="form-control" placeholder="Enter account number" />
+                                <span asp-validation-for="ToAccountNumber" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label asp-for="Amount" class="form-label">Amount</label>
+                                <input asp-for="Amount" class="form-control" placeholder="e.g. 1000.00" />
+                                <span asp-validation-for="Amount" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label asp-for="Description" class="form-label">Description</label>
+                                <input asp-for="Description" class="form-control" placeholder="e.g. Rent, Gift, etc." />
+                                <span asp-validation-for="Description" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-center mt-4">
+                            <button type="submit" class="btn btn-success px-4 py-2 shadow-sm">Deposit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,168 @@
+﻿@model SimpleBankClient.Entity.Dto.NewApplicationDto
+@{
+    ViewData["Title"] = "Open Account";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet" />
+
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        .hero-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, blue 0%, #b3d7ff 50%, #99c2ff 100%);
+            color: #000;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid #dee2e6;
+            color: #212529;
+        }
+
+        .card-footer {
+            background: transparent;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .form-label {
+            color: #000;
+        }
+
+        .form-control,
+        .form-select {
+            background-color: #fff;
+            color: #212529;
+        }
+
+            .form-control::placeholder {
+                color: #999;
+            }
+
+            .form-control:focus,
+            .form-select:focus {
+                background-color: #fff;
+                color: #212529;
+            }
+
+        .text-danger {
+            color: #dc3545 !important;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="hero-section">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <i class="bi bi-bank me-2"></i>Simple Bank
+                </a>
+            </div>
+        </nav>
+        <hr />
+
+        <!-- Form Content -->
+        <div class="container py-4 flex-grow-1 d-flex align-items-center justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow rounded-4">
+                    <div class="card-header bg-primary text-white text-center rounded-top-4">
+                        <h3 class="mb-0">Open New Account</h3>
+                    </div>
+                    <div class="card-body">
+                        <form asp-action="Index" method="post">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label asp-for="FullName" class="form-label"></label>
+                                    <input asp-for="FullName" class="form-control" placeholder="John Doe" />
+                                    <span asp-validation-for="FullName" class="text-danger small"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="DOB" class="form-label"></label>
+                                    <input asp-for="DOB" type="date" class="form-control" />
+                                    <span asp-validation-for="DOB" class="text-danger small"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="Email" class="form-label"></label>
+                                    <input asp-for="Email" class="form-control" placeholder="john@example.com" />
+                                    <span asp-validation-for="Email" class="text-danger small"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="PhoneNumber" class="form-label"></label>
+                                    <input asp-for="PhoneNumber" class="form-control" placeholder="9876543210" />
+                                    <span asp-validation-for="PhoneNumber" class="text-danger small"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="AadharNumber" class="form-label"></label>
+                                    <input asp-for="AadharNumber" class="form-control" placeholder="1234-5678-9012" />
+                                    <span asp-validation-for="AadharNumber" class="text-danger small"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="PAN" class="form-label"></label>
+                                    <input asp-for="PAN" class="form-control" placeholder="ABCDE1234F" />
+                                    <span asp-validation-for="PAN" class="text-danger small"></span>
+                                </div>                                
+                                <div class="col-12">
+                                    <label asp-for="Address" class="form-label"></label>
+                                    <input asp-for="Address" class="form-control" placeholder="123 Main Street, City, ZIP" />
+                                    <span asp-validation-for="Address" class="text-danger small"></span>
+                                </div>              
+                                <div class="col-md-6">
+                                    <label asp-for="AccountTypeId" class="form-label">Account Type</label>
+                                    <select asp-for="AccountTypeId" class="form-select"
+                                            asp-items="@Model.AccountTypes">
+                                        <option value="">-- Select --</option>
+                                    </select>
+                                    <span asp-validation-for="AccountTypeId" class="text-danger small"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="IFSC" class="form-label">Branch</label>
+                                    <select asp-for="IFSC" class="form-select"
+                                            asp-items="@Model.Branches">
+                                        <option value="">-- Select Branch --</option>
+                                    </select>
+                                    <span asp-validation-for="IFSC" class="text-danger small"></span>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-center mt-4 gap-3">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <a asp-action="Index" asp-controller="Home" class="btn btn-secondary"">Go Home</a>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer text-muted text-center small">
+                        We'll review your application soon.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js"></script>
+
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+</body>
+</html>

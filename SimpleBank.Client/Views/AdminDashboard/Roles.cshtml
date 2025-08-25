@@ -1,0 +1,71 @@
+﻿@model List<Microsoft.AspNetCore.Identity.IdentityRole>
+
+@{
+    ViewData["Title"] = "All Roles";
+    Layout = "_HomeLayout";
+}
+
+<div class="d-flex">
+    <!-- Sidebar -->
+    @await Html.PartialAsync("_SidebarPartial")
+
+    <!-- Main Content -->
+    <div class="main-content flex-grow-1 p-4 bg-light">
+        <div class="mb-3">
+            <form asp-controller="Role" asp-action="AddRole" method="get">
+                <button type="submit" class="btn btn-sm btn-info me-1">+ Add Role</button>
+            </form>
+        </div>
+
+        <div class="container">
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">All Roles</h4>
+                </div>
+                <div class="card-body">
+                    @if (Model != null && Model.Any())
+                    {
+                        <table class="table table-hover table-bordered">
+                            <thead class="table-info">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Role Name</th>
+                                    <th>Role ID</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < Model.Count; i++)
+                                {
+                                    <tr>
+                                        <td>@(i + 1)</td>
+                                        <td>@Model[i].Name</td>
+                                        <td>@Model[i].Id</td>
+                                        <td>                                            
+                                            <form asp-controller="Role" asp-action="RoleDetails" asp-route-id="@Model[i].Id" method="get">
+                                                <button type="submit" class="btn btn-sm btn-info me-1">Details</button>
+                                            </form>
+
+                                            @if (Model[i].Name != "SuperAdmin")
+                                            {
+                                                <form asp-controller="Role" asp-action="DeleteRole" asp-route-id="@Model[i].Id" method="get">
+                                                    <button type="submit" class="btn btn-sm btn-danger me-1">Delete</button>
+                                                </form>
+                                            }
+                                        </td>
+                                    </tr>               
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning text-center">
+                            No roles found.
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

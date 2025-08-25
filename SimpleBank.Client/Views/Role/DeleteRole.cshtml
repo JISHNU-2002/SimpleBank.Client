@@ -1,0 +1,35 @@
+﻿@model SimpleBankClient.Entity.Dto.RemoveRoleDto
+
+@{
+    ViewData["Title"] = "Delete Role";
+    Layout = "_HomeLayout";
+}
+
+<div class="d-flex">
+    <!-- Sidebar -->
+    @await Html.PartialAsync("_SidebarPartial")
+
+
+    <!-- Main content: center-aligned card -->
+    <div class="flex-grow-1 d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="card shadow" style="width: 400px;">
+            <div class="card-header bg-danger text-white text-center">
+                <h5 class="mb-0">Delete Role</h5>
+            </div>
+            <div class="card-body text-center">
+                <p>Are you sure you want to delete the role: <strong>@Model.RoleName</strong>?</p>
+
+                <form asp-action="DeleteRole" method="post">
+                    <button type="submit" class="btn btn-danger me-2">Yes, Delete</button>
+                    <a asp-action="Roles" asp-controller="AdminDashboard" class="btn btn-secondary">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

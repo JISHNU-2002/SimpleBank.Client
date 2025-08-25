@@ -1,0 +1,158 @@
+﻿@model IEnumerable<ApplicationFormDto>
+
+@{
+    Layout = "_HomeLayout";
+    ViewData["Title"] = "Manager Dashboard";
+}
+
+<style>
+    .dashboard-container {
+        min-height: calc(100vh - 60px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        position: relative;
+        z-index: 1;
+    }
+
+    .dashboard-card {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        border-radius: 1rem;
+        background-color: rgba(255, 255, 255, 0.9);
+    }
+
+    .dashboard-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .dashboard-card img {
+        max-width: 80px;
+        margin-bottom: 1rem;
+    }
+</style>
+
+<div class="d-flex">
+    @await Html.PartialAsync("_SidebarPartial")
+
+    <div class="p-4 flex-grow-1 main-content">
+        <div class="mb-4 d-flex justify-content-between">
+            <h2 class="mb-0">Welcome, <span class="text-primary">@User.Identity.Name</span></h2>
+        </div>
+        <hr />
+        <div class="dashboard-container">          
+
+            <div class="row g-4 justify-content-center">
+                <!-- Deposit Card -->
+                <div class="col-md-4">
+                    <div class="card dashboard-card shadow border-0 text-center p-4 h-100">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2921/2921222.png" alt="Deposit Icon" />
+                        <h5 class="fw-bold mb-2">Deposit Funds</h5>
+                        <p class="text-muted small mb-4">
+                            Add money to your account securely and instantly.
+                        </p>
+                        <a href="@Url.Action("Deposit", "Transactions")"
+                           class="btn btn-outline-primary btn-lg rounded-pill px-4">Deposit</a>
+                    </div>
+                </div>                
+
+                <!-- Users Card -->
+                <div class="col-md-4">
+                    <div class="card dashboard-card shadow border-success text-center p-4 h-100">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="Users Icon" />
+                        <h5 class="fw-bold mb-2">Manage Users</h5>
+                        <p class="text-muted small mb-4">
+                            View, create, and manage all registered users in the system.
+                        </p>
+                        <a asp-controller="AdminDashboard" asp-action="Users"
+                           class="btn btn-outline-success btn-lg rounded-pill px-4">Go to Users</a>
+                    </div>
+                </div>
+
+                <!-- Withdraw Card -->
+                <div class="col-md-4">
+                    <div class="card dashboard-card shadow border-0 text-center p-4 h-100">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1828/1828469.png" alt="Transfer Icon" />
+                        <h5 class="fw-bold mb-2">Withdraw Funds</h5>
+                        <p class="text-muted small mb-4">
+                            Send money to other accounts quickly and securely.
+                        </p>
+                        <a href="@Url.Action("Withdraw", "Transactions")"
+                           class="btn btn-outline-primary btn-lg rounded-pill px-4">Withdraw</a>
+                    </div>
+                </div>
+            </div>
+            <hr />
+
+            <!-- Applications Table -->
+            <div class="card shadow-sm border-secondary rounded-4 w-100" style="max-width: 1100px;">
+                <div class="card-header bg-secondary text-white">
+                    <h4 class="mb-0">Pending Applications</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="adminFormTable" class="table table-bordered table-hover w-100">
+                            <thead class="table-secondary text-center">
+                                <tr>
+                                    <th>Form ID</th>
+                                    <th>Full Name</th>
+                                    <th>Email</th>
+                                    <th>Account Type</th>
+                                    <th>IFSC</th>
+                                    <th>Registration Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null && Model.Any())
+                                {
+                                    foreach (var app in Model.Where(a => a.Status == "FormFilled"))
+                                    {
+                                        <tr class="text-center align-middle">
+                                            <td>@app.FormId</td>
+                                            <td>@app.FullName</td>
+                                            <td>@app.Email</td>
+                                            <td>@app.AccountTypeName</td>
+                                            <td>@app.IFSC</td>
+                                            <td>@app.DateOfRegistration.ToString("dd-MM-yyyy")</td>
+                                            <td>
+                                                <form asp-controller="ApplicationForm" asp-action="Approve" asp-route-id="@app.FormId" method="post" class="d-inline">
+                                                    <button type="submit" class="btn btn-sm btn-outline-success me-1"><i class="fa-solid fa-thumbs-up"></i></button>
+                                                </form>
+                                                <form asp-controller="ApplicationForm" asp-action="Reject" asp-route-id="@app.FormId" method="post" class="d-inline">
+                                                    <button type="submit" class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-thumbs-down"></i></button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="7" class="text-center text-muted">No application forms found.</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#adminFormTable').DataTable({
+                responsive: true,
+                autoWidth: false,
+                columnDefs: [
+                    { targets: '_all', className: 'dt-nowrap text-center' }
+                ]
+            });
+        });
+    </script>
+}

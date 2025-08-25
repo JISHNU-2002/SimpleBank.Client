@@ -1,0 +1,91 @@
+﻿@model IEnumerable<SimpleBankClient.Entity.Dto.UsersDto>
+
+@{
+    ViewData["Title"] = "Users with Details";
+    Layout = "_HomeLayout";
+}
+
+<div class="d-flex">
+    @await Html.PartialAsync("_SidebarPartial")
+
+    <!-- Main content -->
+    <div class="p-4 flex-grow-1 w-100">
+        <div class="card shadow-sm border-primary rounded-4">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <h4 class="mb-0">Users</h4>
+                @if (User.IsInRole("Manager"))
+                {
+                    <form asp-controller="Authorize" asp-action="Register" method="get" class="mb-0">
+                        <button type="submit" class="btn btn-sm btn-light">+ Register New</button>
+                    </form>
+                }                
+            </div>
+
+            <div class="card-body">
+                <table id="usersTable" class="table table-bordered table-striped w-100" style="table-layout: fixed;">
+                    <thead class="table-info">
+                        <tr>
+                            <th style="white-space: nowrap; width: 210px;">@Html.DisplayNameFor(model => model.First().Username)</th>
+                            <th style="white-space: nowrap; width: 40px;">@Html.DisplayNameFor(model => model.First().FullName)</th>
+                            <th style="white-space: nowrap; width: 85px;">@Html.DisplayNameFor(model => model.First().AccountNumber)</th>
+                            <th style="white-space: nowrap; width: 50px;">@Html.DisplayNameFor(model => model.First().Balance)</th>
+                            <th style="white-space: nowrap; width: 45px;">@Html.DisplayNameFor(model => model.First().IFSC)</th>
+                            <th style="white-space: nowrap; width: 55px;">@Html.DisplayNameFor(model => model.First().BranchName)</th>
+                            <th style="white-space: nowrap; width: 40px;">Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                @if(item.IsActive is true)
+                                {
+                                    <td>@Html.DisplayFor(m => item.Username)</td>
+                                    <td>@Html.DisplayFor(m => item.FullName)</td>
+                                    <td>@Html.DisplayFor(m => item.AccountNumber)</td>
+                                    <td class="text-end">₹@item.Balance.ToString("N2")</td>
+                                    <td>@Html.DisplayFor(m => item.IFSC)</td>
+                                    <td>@Html.DisplayFor(m => item.BranchName)</td>
+                                    <td>
+                                        <div class="d-flex flex-wrap gap-1">
+                                            @if (User.IsInRole("SuperAdmin"))
+                                            {
+                                                <form asp-controller="Role" asp-action="AddRemoveRoles" asp-route-id="@item.UserId" method="get">
+                                                    <button type="submit" class="btn btn-sm btn-outline-primary">Assign Role</button>
+                                                </form>
+                                            }
+                                            <form asp-controller="ApplicationForm" asp-action="FormDetails" asp-route-id="@item.FormId" method="get" class="d-inline">
+                                                <button type="submit" class="btn btn-sm btn-info me-1">Details</button>
+                                            </form>
+                                            @if (User.IsInRole("Manager"))
+                                            {
+                                                <form asp-controller="Account" asp-action="DeleteUser" asp-route-id="@item.UserId" method="get">
+                                                    <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                                                </form>
+                                            }
+                                        </div>
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#usersTable').DataTable({
+                responsive: true,
+                autoWidth: false,
+                columnDefs: [
+                    { targets: '_all', className: 'dt-nowrap' }
+                ]
+            });
+        });
+    </script>
+}

@@ -1,0 +1,41 @@
+﻿@model SimpleBankClient.Entity.Dto.AccountTypeDto
+
+@{
+    ViewData["Title"] = "Delete Account Type";
+    Layout = "_HomeLayout";
+}
+
+<div class="d-flex">
+    @await Html.PartialAsync("_SidebarPartial")
+
+    <!-- Centered card layout -->
+    <div class="flex-grow-1 d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="card shadow" style="width: 400px;">
+            <div class="card-header bg-danger text-white text-center">
+                <h5 class="mb-0">Delete Account Type</h5>
+            </div>
+            <div class="card-body text-center">
+                <p>Are you sure you want to delete the account type: <strong>@Model.TypeName</strong>?</p>
+
+                <ul class="list-group mb-3 text-start">
+                    <li class="list-group-item">
+                        <strong>Type ID:</strong> @Model.TypeId
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Minimum Balance:</strong> ₹@Model.MinBalance.ToString("N2")
+                    </li>
+                </ul>
+
+                <form asp-action="DeleteAccountType" method="post">
+                    <input type="hidden" name="id" value="@Model.TypeId" />
+                    <button type="submit" class="btn btn-danger me-2">Yes, Delete</button>
+                    <a asp-action="AccountTypes" asp-controller="AdminDashboard" class="btn btn-secondary">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

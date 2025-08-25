@@ -1,0 +1,182 @@
+﻿@{
+    ViewData["Title"] = "Simple Bank - Your Digital Banking Partner";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #004bff 0%, #0052cc 50%, #0069ff 100%);
+            min-height: 100vh;
+            color: white;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: bold;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .btn-gradient-primary {
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            border: none;
+        }
+
+            .btn-gradient-primary:hover {
+                background: linear-gradient(45deg, #0056b3, #004085);
+            }
+
+        .btn-gradient-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            color: white;
+        }
+
+            .btn-gradient-secondary:hover {
+                background: rgba(255, 255, 255, 0.3);
+                border-color: rgba(255, 255, 255, 0.6);
+                color: white;
+            }
+
+        .navbar-toggler {
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        .banking-image {
+            border-radius: 20px;
+            max-height: 500px;
+            object-fit: contain;
+            width: 100%;
+            filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.3));
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-section">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <i class="bi bi-bank me-2"></i>Simple Bank
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>                     
+                    </ul>
+                    <a class="btn btn-warning fw-bold px-4" asp-controller="Authorize" asp-action="Login">Login</a>
+                </div>
+            </div>
+        </nav>
+        <hr />
+
+        <!-- Hero Content -->
+        <div class="container">
+            <div class="row align-items-center" style="min-height: calc(100vh - 80px);">
+                <!-- Left -->
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="hero-title mb-4">Banking Made Simple</div>
+                    <p class="hero-subtitle mb-4 lead">
+                        Experience modern, secure, and easy digital banking from anywhere in the world.
+                    </p>                   
+
+                    <!-- Features -->
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-lightning-charge text-warning me-3 fs-4"></i>
+                                <div>
+                                    <h6 class="mb-0 fw-bold">Instant Transfers</h6>
+                                    <small class="text-light">Send money instantly</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-shield-lock-fill text-success me-3 fs-4"></i>
+                                <div>
+                                    <h6 class="mb-0 fw-bold">Secure Banking</h6>
+                                    <small class="text-light">256-bit encryption</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-phone-fill text-info me-3 fs-4"></i>
+                                <div>
+                                    <h6 class="mb-0 fw-bold">Mobile Access</h6>
+                                    <small class="text-light">Bank on the go</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-headset text-primary me-3 fs-4"></i>
+                                <div>
+                                    <h6 class="mb-0 fw-bold">24/7 Support</h6>
+                                    <small class="text-light">Always here to help</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CTA Buttons -->
+                    <div class="d-flex flex-column flex-sm-row gap-3 mb-5">
+                        <a asp-controller="ApplicationForm" asp-action="Index"
+                           class="btn btn-gradient-primary btn-lg px-4 py-3 fw-bold">
+                            <i class="bi bi-person-plus me-2"></i>Open Account
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right -->
+                <div class="col-lg-6">
+                    <div class="position-relative d-flex align-items-center justify-content-center">
+                        <img src="https://protium.co.in/wp-content/uploads/2022/12/Banking-as-a-service-BaaS-700x682.png"
+                             alt="Digital Banking Illustration"
+                             class="banking-image"
+                             loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

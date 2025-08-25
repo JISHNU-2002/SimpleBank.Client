@@ -1,0 +1,35 @@
+﻿@model SimpleBankClient.Entity.Dto.RoleDto
+
+@{
+    ViewData["Title"] = "Add New Role";
+    Layout = "_HomeLayout";
+}
+
+<div class="d-flex">
+    <!-- Sidebar -->
+    @await Html.PartialAsync("_SidebarPartial")
+
+    <!-- Main Content -->
+    <div class="main-content flex-grow-1 p-4 bg-light">
+        <div class="container">
+            <div class="card shadow-sm border-0 rounded-4 mx-auto" style="max-width: 500px;">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Add New Role</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="AddRole" method="post" novalidate>
+                        <div class="mb-3">
+                            <label asp-for="RoleName" class="form-label">Role Name</label>
+                            <input asp-for="RoleName" class="form-control" placeholder="e.g. Admin, User, Manager" />
+                            <span asp-validation-for="RoleName" class="text-danger small"></span>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success">Create Role</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+﻿@model IEnumerable<ApplicationFormDto>
+
+@{
+    Layout = "_HomeLayout";
+    ViewData["Title"] = "Application Forms";
+}
+
+<div class="d-flex">
+    @await Html.PartialAsync("_SidebarPartial")
+
+    <!-- Main content -->
+    <div class="p-4 flex-grow-1 w-100">
+        <div class="card shadow-sm border-0 rounded-4">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <h4 class="mb-0">Application Forms</h4>
+                @* <a asp-action="Create" class="btn btn-light btn-sm">+ New Application</a> *@
+            </div>
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="applicationTable" class="table table-bordered table-striped table-hover w-100">
+                        <thead class="table-info text-center">
+                            <tr>
+                                <th>Form ID</th>
+                                <th>Full Name</th>
+                                <th>Account Type</th>
+                                <th>IFSC</th>
+                                <th>Registration Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Any())
+                            {
+                                foreach (var app in Model)
+                                {
+                                    <tr class="align-middle text-center">
+                                        <td>@app.FormId</td>
+                                        <td>@app.FullName</td>
+                                        <td>@app.AccountTypeName</td>
+                                        <td>@app.IFSC</td>
+                                        <td>@app.DateOfRegistration.ToString("dd-MM-yyyy")</td>
+                                        <td>@app.Status</td>
+                                        <td>
+                                            <form asp-controller="ApplicationForm" asp-action="FormDetails" asp-route-id="@app.FormId" method="get" class="d-inline">
+                                                <button type="submit" class="btn btn-sm btn-info me-1">Details</button>
+                                            </form>                                            
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="7" class="text-center text-muted">No application forms found.</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#applicationTable').DataTable({
+                responsive: true,
+                autoWidth: false,
+                columnDefs: [
+                    { targets: '_all', className: 'dt-nowrap text-center' }
+                ]
+            });
+        });
+    </script>
+}

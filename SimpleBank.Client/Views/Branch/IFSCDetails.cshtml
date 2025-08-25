@@ -1,0 +1,59 @@
+﻿@model IEnumerable<SimpleBankClient.Entity.Dto.IFSCDetailsDto>
+
+@{
+    ViewData["Title"] = "IFSC Details";
+    Layout = "_HomeLayout"; // or your custom layout with Bootstrap included
+}
+
+<div class="d-flex">
+    @await Html.PartialAsync("_SidebarPartial")
+
+    <!-- Main content -->
+    <div class="container-fluid p-4">
+        <div class="card shadow-lg">
+            <div class="card-body">
+                <h2 class="card-title mb-4">
+                    Branch Account Details : @Model.FirstOrDefault()?.IFSCCode
+                 </h2>
+                <div class="mb-3">
+                    <form asp-controller="Branch" asp-action="AddBranch" method="get">
+                        <button type="submit" class="btn btn-sm btn-info me-1">+ Add Branch</button>
+                    </form>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.First().AccountNumber)</th>
+                                <th>@Html.DisplayNameFor(model => model.First().FullName)</th>
+                                <th>@Html.DisplayNameFor(model => model.First().Username)</th>
+                                <th>@Html.DisplayNameFor(model => model.First().AccountTypeName)</th>
+                                <th>@Html.DisplayNameFor(model => model.First().BranchName)</th>
+                                <th>@Html.DisplayNameFor(model => model.First().Balance)</th>
+                                <th>@Html.DisplayNameFor(model => model.First().Email)</th>
+                                <th>@Html.DisplayNameFor(model => model.First().PhoneNumber)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.AccountNumber</td>
+                                    <td>@item.FullName</td>
+                                    <td>@item.Username</td>
+                                    <td>@item.AccountTypeName</td>
+                                    <td>@item.BranchName</td>
+                                    <td>@item.Balance.ToString("C")</td>
+                                    <td>@item.Email</td>
+                                    <td>@item.PhoneNumber</td>                                    
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

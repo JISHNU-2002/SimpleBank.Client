@@ -1,0 +1,45 @@
+﻿@model SimpleBankClient.Entity.Dto.AccountTypeDto
+
+@{
+    Layout = "_HomeLayout";
+    ViewData["Title"] = "Edit Account Type";
+}
+
+<div class="d-flex">
+    @await Html.PartialAsync("_SidebarPartial")
+
+    <!-- Centered content with smaller card -->
+    <div class="flex-grow-1 d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="card shadow border-warning" style="width: 400px;">
+            <div class="card-header bg-warning text-dark text-center">
+                <h5 class="mb-0">Edit Account Type</h5>
+            </div>
+            <div class="card-body">
+                <form asp-action="EditAccountType" method="post">
+                    <input type="hidden" asp-for="TypeId" />
+
+                    <div class="mb-3">
+                        <label asp-for="TypeName" class="form-label"></label>
+                        <input asp-for="TypeName" class="form-control" />
+                        <span asp-validation-for="TypeName" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="MinBalance" class="form-label"></label>
+                        <input asp-for="MinBalance" class="form-control" />
+                        <span asp-validation-for="MinBalance" class="text-danger"></span>
+                    </div>
+
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-warning text-white">Update</button>
+                        <a asp-action="AccountTypes" asp-controller="AdminDashboard" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

@@ -1,0 +1,92 @@
+﻿@model SimpleBankClient.Entity.Dto.ProfileDto
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "_HomeLayout";
+}
+
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden;
+    }
+</style>
+
+<div class="d-flex">
+    @await Html.PartialAsync("_SidebarPartial")
+
+    <!-- Main Content -->
+    <div class="flex-grow-1 p-4 bg-light d-flex justify-content-center align-items-start">
+        <div class="col-md-8">
+            <div class="card shadow rounded-4">
+                <div class="card-header bg-primary text-white text-center rounded-top-4">
+                    <h4 class="mb-0">User Profile</h4>
+                </div>
+                <div class="card-body px-4 py-3">
+                    <div class="row mb-3">
+                        <div class="col-sm-4 fw-bold">Account Number</div>
+                        <div class="col-sm-8">@Model.AccountNumber</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-4 fw-bold">Full Name</div>
+                        <div class="col-sm-8">@Model.FullName</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-4 fw-bold">Email</div>
+                        <div class="col-sm-8">@Model.Email</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-4 fw-bold">Phone</div>
+                        <div class="col-sm-8">@Model.PhoneNumber</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-4 fw-bold">Aadhar</div>
+                        <div class="col-sm-8">@Model.AadharNumber</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-4 fw-bold">PAN</div>
+                        <div class="col-sm-8">@Model.PAN</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-4 fw-bold">Address</div>
+                        <div class="col-sm-8">@Model.Address</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-4 fw-bold">Date of Birth</div>
+                        <div class="col-sm-8">@Model.DOB.ToShortDateString()</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-4 fw-bold">Account Type ID</div>
+                        <div class="col-sm-8">@Model.AccountTypeId</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-4 fw-bold">Account Type</div>
+                        <div class="col-sm-8">@Model.AccountTypeName</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-4 fw-bold">IFSC</div>
+                        <div class="col-sm-8">@Model.IFSC</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-4 fw-bold">Branch Name</div>
+                        <div class="col-sm-8">@Model.BranchName</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-4 fw-bold">Balance</div>
+                        <div class="col-sm-8">₹@Model.Balance.ToString("N2")</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-4 fw-bold">Registration Date</div>
+                        <div class="col-sm-8">@Model.DateOfRegistration.ToShortDateString()</div>
+                    </div>
+
+                    <!-- Edit Profile Button -->
+                    <div class="d-flex justify-content-center mt-4">
+                        <a class="btn btn-warning px-4" asp-action="UpdateProfile"><i class="fa-solid fa-pen-to-square"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
