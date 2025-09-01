@@ -445,3 +445,13 @@ var dashboard = await apiClient.GetAsync<DashboardViewModel>("api/dashboard/1001
 # Sample Screens
 
 ![Home](https://github.com/JISHNU-2002/SimpleBank.Client/blob/master/SimpleBank.Client/Images/1_Home.png)
+
+![Application Form](https://github.com/JISHNU-2002/SimpleBank.Client/blob/master/SimpleBank.Client/Images/2_NewAccount.png)
+
+![Application Submit](https://github.com/JISHNU-2002/SimpleBank.Client/blob/master/SimpleBank.Client/Images/3_ApplicationSubmit.png)
+
+![SuperAdmin](https://github.com/JISHNU-2002/SimpleBank.Client/blob/master/SimpleBank.Client/Images/4_SuperAdmin_Dashboard.png)
+
+![Manager](https://github.com/JISHNU-2002/SimpleBank.Client/blob/master/SimpleBank.Client/Images/5_Manager_Dashboard.png)
+
+![Customer](https://github.com/JISHNU-2002/SimpleBank.Client/blob/master/SimpleBank.Client/Images/6_Customer_Dashboard.png)
